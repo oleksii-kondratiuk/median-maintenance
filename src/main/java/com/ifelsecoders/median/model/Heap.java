@@ -4,4 +4,6 @@ public interface Heap<T extends Number> {
 
     void insert(T object);
 
+    T extractTopValue();
+
 }

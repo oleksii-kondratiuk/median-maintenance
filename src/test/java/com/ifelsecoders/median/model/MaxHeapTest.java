@@ -32,4 +32,22 @@ public class MaxHeapTest {
         assertEquals(maxHeap.storage[3], 2);
     }
 
+    @Test
+    public void extractMaximal() {
+        maxHeap.insert(2);
+        maxHeap.insert(4);
+        maxHeap.insert(6);
+        maxHeap.insert(7);
+
+        assertEquals(7, maxHeap.storage[0]);
+        assertEquals(6, maxHeap.storage[1]);
+        assertEquals(4, maxHeap.storage[2]);
+        assertEquals(2, maxHeap.storage[3]);
+
+        assertEquals(7, maxHeap.extractTopValue().intValue());
+
+        assertEquals(maxHeap.storage[0], 6);
+        assertEquals(maxHeap.storage[1], 2);
+        assertEquals(maxHeap.storage[2], 4);
+    }
 }

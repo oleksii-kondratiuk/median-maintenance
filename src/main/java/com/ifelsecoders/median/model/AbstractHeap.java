@@ -24,11 +24,32 @@ public abstract class AbstractHeap<T extends Number> implements Heap<T> {
 
     private void bubbleUp(Integer keyId) {
         int parentKey = getParentKey(keyId);
-        if(bubblingCheck(parentKey, keyId)) {
+        if(bubblingUpCheck(parentKey, keyId)) {
             Integer temp = (Integer) storage[parentKey];
             storage[parentKey] = storage[keyId];
             storage[keyId] = temp;
             bubbleUp(parentKey);
+        }
+    }
+
+    @Override
+    public T extractTopValue() {
+        T topValue = (T) storage[0];
+        storage[0] = storage[numberOfElementsInArray - 1];
+
+        bubbleDown(0);
+
+        return topValue;
+    }
+
+    private void bubbleDown(int keyId) {
+        int childItemToExchangeId = getItemIdToExchange(keyId);
+        T temp = (T) storage[childItemToExchangeId];
+        storage[childItemToExchangeId] = storage[keyId];
+        storage[keyId] = temp;
+
+        if(bubblingDownCheck(childItemToExchangeId)) {
+            bubbleDown(childItemToExchangeId);
         }
     }
 
@@ -42,5 +63,9 @@ public abstract class AbstractHeap<T extends Number> implements Heap<T> {
         return key / 2;
     }
 
-    protected abstract boolean bubblingCheck(int parentKey, int keyId);
+    protected abstract boolean bubblingUpCheck(int parentKey, int keyId);
+
+    protected abstract boolean bubblingDownCheck(int parentKey);
+
+    protected abstract int getItemIdToExchange(int keyId);
 }
