@@ -6,4 +6,7 @@ public interface Heap<T extends Number> {
 
     T extractTopValue();
 
+    T checkTopValue();
+
+    int size();
 }

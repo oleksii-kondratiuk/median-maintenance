@@ -50,4 +50,21 @@ public class MaxHeapTest {
         assertEquals(maxHeap.storage[1], 2);
         assertEquals(maxHeap.storage[2], 4);
     }
+
+    @Test
+    public void checkMaximal() {
+        maxHeap.insert(2);
+        maxHeap.insert(4);
+        maxHeap.insert(6);
+
+        assertEquals(6, maxHeap.storage[0]);
+        assertEquals(2, maxHeap.storage[1]);
+        assertEquals(4, maxHeap.storage[2]);
+
+        assertEquals(6, maxHeap.checkTopValue().intValue());
+
+        assertEquals(6, maxHeap.storage[0]);
+        assertEquals(2, maxHeap.storage[1]);
+        assertEquals(4, maxHeap.storage[2]);
+    }
 }

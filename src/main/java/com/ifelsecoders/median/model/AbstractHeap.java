@@ -9,7 +9,7 @@ public abstract class AbstractHeap<T extends Number> implements Heap<T> {
 
     @Override
     public void insert(T object) {
-        if (numberOfElementsInArray == storage.length - 1) {
+        if (numberOfElementsInArray > storage.length - 3) {
             Object[] tempStorage = storage;
             // TODO define proper strategy for storage extension
             storage = new Object[storage.length * 2];
@@ -39,11 +39,23 @@ public abstract class AbstractHeap<T extends Number> implements Heap<T> {
 
         bubbleDown(0);
 
+        storage[numberOfElementsInArray - 1] = null;
+        numberOfElementsInArray--;
+
         return topValue;
     }
 
+    @Override
+    public T checkTopValue() {
+        return (T) storage[0];
+    }
+
     private void bubbleDown(int keyId) {
-        int childItemToExchangeId = getItemIdToExchange(keyId);
+        Integer childItemToExchangeId = getItemIdToExchange(keyId);
+        if (childItemToExchangeId == null) {
+            return;
+        }
+
         T temp = (T) storage[childItemToExchangeId];
         storage[childItemToExchangeId] = storage[keyId];
         storage[keyId] = temp;
@@ -63,9 +75,14 @@ public abstract class AbstractHeap<T extends Number> implements Heap<T> {
         return key / 2;
     }
 
+    @Override
+    public int size() {
+        return numberOfElementsInArray;
+    }
+
     protected abstract boolean bubblingUpCheck(int parentKey, int keyId);
 
     protected abstract boolean bubblingDownCheck(int parentKey);
 
-    protected abstract int getItemIdToExchange(int keyId);
+    protected abstract Integer getItemIdToExchange(int keyId);
 }
