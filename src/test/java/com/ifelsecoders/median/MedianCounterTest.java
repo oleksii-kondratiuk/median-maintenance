@@ -50,4 +50,16 @@ public class MedianCounterTest {
         File fileWithInputValues = new File(getClass().getResource("/test2.txt").getFile());
         assertEquals(9335, medianCounter.countMediansInFile(fileWithInputValues).intValue() % 10000);
     }
+
+    @Test
+    public void inputRandom10_40() {
+        File fileWithInputValues = new File(getClass().getResource("/input_random_10_40.txt").getFile());
+        assertEquals(695, medianCounter.countMediansInFile(fileWithInputValues).intValue() % 10000);
+    }
+
+    @Test
+    public void inputRandom11_40() {
+        File fileWithInputValues = new File(getClass().getResource("/input_random_11_40.txt").getFile());
+        assertEquals(868, medianCounter.countMediansInFile(fileWithInputValues).intValue() % 10000);
+    }
 }

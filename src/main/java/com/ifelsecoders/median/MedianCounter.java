@@ -44,18 +44,20 @@ public class MedianCounter {
 
         if(leftHeap.checkTopValue() > value) {
             leftHeap.insert(value);
-            if(leftHeap.size() - rightHeap.size() > 1) {
-                rightHeap.insert(leftHeap.extractTopValue());
-            }
         } else if(rightHeap.size() == 0) {
             rightHeap.insert(value);
         } else if (rightHeap.checkTopValue() < value) {
             rightHeap.insert(value);
-            if(rightHeap.size() - leftHeap.size() > 1) {
-                leftHeap.insert(rightHeap.extractTopValue());
-            }
         } else { // if(leftHeap.size() == rightHeap.size())
             leftHeap.insert(value);
+        }
+
+        if(leftHeap.size() - rightHeap.size() > 1) {
+            rightHeap.insert(leftHeap.extractTopValue());
+        }
+
+        if(rightHeap.size() - leftHeap.size() > 1) {
+            leftHeap.insert(rightHeap.extractTopValue());
         }
 
         if(leftHeap.size() >= rightHeap.size()) {
